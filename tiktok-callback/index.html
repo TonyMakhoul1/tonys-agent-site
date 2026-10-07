@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Connected</title><link rel="stylesheet" href="../style.css"></head>
+<body><h1 id="t">Connecting…</h1><p id="p"></p><div id="c" class="code" hidden></div><button id="b" hidden>Copy</button>
+<script>
+const q=new URLSearchParams(location.search),code=q.get("code"),err=q.get("error");
+const t=document.getElementById("t"),p=document.getElementById("p"),c=document.getElementById("c"),b=document.getElementById("b");
+if(code){t.textContent="✅ TikTok connected";p.textContent="Copy this one-time code and paste it into your .env file as TIKTOK_CODE= (it expires in a few minutes).";c.textContent=code;c.hidden=false;b.hidden=false;
+b.onclick=()=>navigator.clipboard.writeText(code).then(()=>b.textContent="Copied ✓");}
+else{t.textContent="Not connected";p.textContent=err?("TikTok said: "+err+" "+(q.get("error_description")||"")):"No code received. Start the connection again.";}
+</script></body></html>
