@@ -2,6 +2,8 @@
 <body><h1 id="t">Connecting…</h1><p id="p"></p><div id="c" class="code" hidden></div><button id="b" hidden>Copy</button>
 <script>
 const q=new URLSearchParams(location.search),code=q.get("code"),err=q.get("error");
+// Tony's Agent Studio (the posting page on the owner's PC) starts its login with state "studio-…": hand the result back to it.
+if((q.get("state")||"").startsWith("studio-")){location.replace("http://localhost:5174/callback"+location.search);}
 const t=document.getElementById("t"),p=document.getElementById("p"),c=document.getElementById("c"),b=document.getElementById("b");
 if(code){t.textContent="✅ TikTok connected";p.textContent="Copy this one-time code and paste it into your .env file as TIKTOK_CODE= (it expires in a few minutes).";c.textContent=code;c.hidden=false;b.hidden=false;
 b.onclick=()=>navigator.clipboard.writeText(code).then(()=>b.textContent="Copied ✓");}
